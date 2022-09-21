@@ -14,6 +14,8 @@
 ARG image=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base-nonroot:2021-12-01-1638322424
 
 FROM --platform=$BUILDPLATFORM golang:1.19 AS builder
+ARG GOPROXY
+ENV GOPROXY=${GOPROXY}
 WORKDIR /go/src/github.com/kubernetes-sigs/aws-iam-authenticator
 COPY . .
 RUN go mod download
